@@ -19,6 +19,7 @@ namespace Discount.Grpc
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IDiscountRepository, DiscountRepository>();
+            services.AddAutoMapper(typeof(Startup));
             services.AddGrpc();
         }
 
@@ -34,7 +35,7 @@ namespace Discount.Grpc
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGrpcService<DiscountServices>();
+                endpoints.MapGrpcService<DiscountService>();
 
                 endpoints.MapGet("/", async context =>
                 {
